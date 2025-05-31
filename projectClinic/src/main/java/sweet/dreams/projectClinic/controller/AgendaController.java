@@ -31,4 +31,12 @@ public class AgendaController {
         return "agenda/agendas"; // Nome do arquivo HTML (sem extensão)
     }
 
+
+    @PostMapping
+    public String adicionarAgenda(@ModelAttribute Agenda agenda) {
+        // As IDs de médico e paciente virão do formulário
+        // O service já valida a existência deles
+        agendaService.salvar(agenda);
+        return "redirect:/agendas";
+    }
 }
