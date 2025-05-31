@@ -1,11 +1,11 @@
-package edu.unialfa.clinica.controller;
+package sweet.dreams.projectClinic.controller;
 
-import edu.unialfa.clinica.model.Medico;
-import edu.unialfa.clinica.service.MedicoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import sweet.dreams.projectClinic.model.Medico;
+import sweet.dreams.projectClinic.service.MedicoService;
 
 @Controller
 @RequestMapping("/medicos")
@@ -44,7 +44,7 @@ public class MedicoController {
 
     @GetMapping("/deletar/{id}")
     public String deletarMedico(@PathVariable Long id) {
-        medicoService.deletar(id);
+        medicoService.deletarPorId(id);
         return "redirect:/medicos";
     }
 }

@@ -7,6 +7,7 @@ import sweet.dreams.projectClinic.model.Medico;
 import sweet.dreams.projectClinic.service.MedicoService;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @AllArgsConstructor
@@ -19,7 +20,7 @@ public class MedicoApi {
     public ResponseEntity<List<Medico>> listarTodos() {return ResponseEntity.ok(medicoService.listarTodos());}
 
     @GetMapping("/{id}")
-    public ResponseEntity<Medico> listarPorId(@PathVariable Long id) {
+    public ResponseEntity<Optional<Medico>> listarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(medicoService.buscarPorId(id));
     }
 

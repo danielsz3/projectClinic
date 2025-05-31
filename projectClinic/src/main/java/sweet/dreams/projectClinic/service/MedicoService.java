@@ -7,6 +7,7 @@ import sweet.dreams.projectClinic.model.Medico;
 import sweet.dreams.projectClinic.repository.MedicoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MedicoService {
@@ -30,11 +31,11 @@ public class MedicoService {
 
     public List<Medico> listarTodos() {return repository.findAll();}
 
-    public Medico buscarPorId(Long id) {return repository.findById(id).get();}
+    public Optional<Medico> buscarPorId(Long id) {return repository.findById(id);}
 
     public void deletarPorId(Long id) {
         try {
-            if (buscarPorId(id).getId() == null) throw new RuntimeException("Não foi possivel encontrar o paciente");
+            if (buscarPorId(id) == null) throw new RuntimeException("Não foi possivel encontrar o paciente");
             repository.deleteById(id);
         } catch (Exception e){
             throw e;
