@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import sweet.dreams.projectClinic.model.Paciente;
 import sweet.dreams.projectClinic.repository.PacienteRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,7 +21,7 @@ public class PacienteService {
         try {
             if (paciente.getNome().isBlank() || paciente.getNome().isEmpty()) throw new RuntimeException("Adicione o nome do Paciente");
             if (paciente.getCpf().isBlank() || paciente.getCpf().isEmpty()) throw new RuntimeException("Adicione o CPF do Paciente");
-            if (paciente.getDataNascimento().isBlank() || paciente.getDataNascimento().isEmpty()) throw new RuntimeException("Adicione a data de nascimento do Paciente");
+            if (paciente.getDataNascimento().after(new Date()) || paciente.getDataNascimento().toString().isEmpty()) throw new RuntimeException("Adicione a data de nascimento do Paciente");
             if (paciente.getTelefone().isBlank() || paciente.getTelefone().isEmpty()) throw new RuntimeException("Adicione o telefone do Paciente");
 
             repository.save(paciente);
