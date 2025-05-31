@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.NotBlank;
 
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -24,7 +25,7 @@ public class Paciente {
     private String cpf;
 
     @NotBlank(message = "Informa a data de nascimento do paciente")
-    private String dataNascimento;
+    private Date dataNascimento;
 
     @NotBlank(message = "Informe o telefone do paciente")
     private String telefone;
