@@ -6,6 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.NotBlank;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -24,8 +28,8 @@ public class Agenda {
     private Paciente paciente;
 
     @NotBlank(message = "Informa a data do atendimento")
-    private String data;
+    private LocalDate data;
 
     @NotBlank(message = "Informa a hora do atendimento")
-    private String hora;
+    private LocalTime hora;
 }
