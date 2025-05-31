@@ -35,4 +35,16 @@ public class MedicoController {
         return "medico/editar_medico"; // Nome do arquivo HTML para edição
     }
 
+    @PostMapping("/editar/{id}")
+    public String atualizarMedico(@PathVariable Long id, @ModelAttribute Medico medico) {
+        medico.setId(id); // Garante que o ID correto seja usado
+        medicoService.salvar(medico);
+        return "redirect:/medicos";
+    }
+
+    @GetMapping("/deletar/{id}")
+    public String deletarMedico(@PathVariable Long id) {
+        medicoService.deletar(id);
+        return "redirect:/medicos";
+    }
 }
