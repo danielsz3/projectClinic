@@ -50,4 +50,25 @@ public class AgendaController {
         return "agenda/editar_agenda"; // Nome do arquivo HTML para edição
     }
 
+    @PostMapping("/editar/{id}")
+    public String atualizarAgenda(@PathVariable Long id, @ModelAttribute Agenda agenda) {
+        // O service lida com a busca e atualização
+        agendaService.atualizar(id, agenda);
+        return "redirect:/agendas";
+    }
+
+    @GetMapping("/deletar/{id}")
+    public String deletarAgenda(@PathVariable Long id) {
+        agendaService.deletar(id);
+        return "redirect:/agendas";
+    }
+
+    // Controller para a página Index
+    @Controller
+    public static class IndexController {
+        @GetMapping("/")
+        public String index() {
+            return "index";
+        }
+    }
 }
