@@ -39,4 +39,15 @@ public class AgendaController {
         agendaService.salvar(agenda);
         return "redirect:/agendas";
     }
+    
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
+        Agenda agenda = agendaService.buscarPorId(id)
+                .orElseThrow(() -> new IllegalArgumentException("ID de Agenda inválido:" + id));
+        model.addAttribute("agenda", agenda);
+        model.addAttribute("medicos", medicoService.listarTodos());
+        model.addAttribute("pacientes", pacienteService.listarTodos());
+        return "agenda/editar_agenda"; // Nome do arquivo HTML para edição
+    }
+
 }
