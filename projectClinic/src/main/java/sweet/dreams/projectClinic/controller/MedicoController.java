@@ -21,5 +21,18 @@ public class MedicoController {
         return "medico/medicos"; // Nome do arquivo HTML (sem extensão)
     }
 
-   
+    @PostMapping
+    public String adicionarMedico(@ModelAttribute Medico medico) {
+        medicoService.salvar(medico);
+        return "redirect:/medicos";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
+        Medico medico = medicoService.buscarPorId(id)
+                .orElseThrow(() -> new IllegalArgumentException("ID de Médico inválido:" + id));
+        model.addAttribute("medico", medico);
+        return "medico/editar_medico"; // Nome do arquivo HTML para edição
+    }
+
 }
