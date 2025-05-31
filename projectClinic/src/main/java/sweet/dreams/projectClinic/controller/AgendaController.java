@@ -1,6 +1,7 @@
 package sweet.dreams.projectClinic.controller;
 
 import sweet.dreams.projectClinic.model.Agenda;
+import sweet.dreams.projectClinic.service.AgendaService;
 import sweet.dreams.projectClinic.service.MedicoService;
 import sweet.dreams.projectClinic.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;

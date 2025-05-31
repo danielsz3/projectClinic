@@ -1,10 +1,12 @@
-package sweet.dreams.projectClinic.Service;
+package sweet.dreams.projectClinic.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sweet.dreams.projectClinic.model.Agenda;
 import sweet.dreams.projectClinic.repository.AgendaRepository;
 import sweet.dreams.projectClinic.repository.PacienteRepository;
+import sweet.dreams.projectClinic.service.MedicoService;
+import sweet.dreams.projectClinic.service.PacienteService;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,13 +23,14 @@ public class AgendaService {
     @Autowired
     private PacienteService pacienteService;
 
-    public List<Agenda> listaTodos(){
+    public List<Agenda> listarTodos(){
         return  agendaRepository.findAll();
     }
 
     public Optional<Agenda> buscarPorId(Long id) {
         return agendaRepository.findById(id);
     }
+
 
     public Agenda salvar(Agenda agenda){
         medicoService.buscarPorId(agenda.getMedico().getId()).orElseThrow(() -> new RuntimeException("Médico não encontrado!"));
