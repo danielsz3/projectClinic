@@ -27,9 +27,5 @@ public class Agenda {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-    @NotNull(message = "Informa a data do atendimento")
-    private LocalDate data;
-
-    @NotNull(message = "Informa a hora do atendimento")
-    private LocalTime hora;
+    private LocalDateTime dataHoraAtendimento;
 }

@@ -32,11 +32,10 @@
                     </div>
                     <div class="col-md-6">
                         <label for="telefone" class="form-label">Telefone:</label>
-                        <input type="text" id="telefone" th:field="*{telefone}" class="form-control" required/>
+                        <input type="text" id="telefone" th:field="*{telefone}" class="form-control"/>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-
                 <a th:href="@{/pacientes}" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>

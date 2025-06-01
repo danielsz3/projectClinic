@@ -1,7 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/layout :: head(paginaTitulo='Agenda')"></head>
-
 <body>
 
 <header th:replace="fragments/layout :: cabecalho"></header>
@@ -33,11 +32,9 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label>Data:</label>
-                        <input class="form-control" type="date" th:field="*{data}" required/>
-
-                        <label>Hora:</label>
-                        <input class="form-control" type="time" th:field="*{hora}" required/>
+                        <label for="dataHoraAtendimento" class="form-label">Data e Hora:</label>
+                        <input type="datetime-local" id="dataHoraAtendimento" th:field="*{dataHoraAtendimento}"
+                               class="form-control" required/>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar Agendamento</button>
@@ -61,7 +58,7 @@
             <td th:text="${a.id}"></td>
             <td th:text="${a.medico.nome} + ' (' + ${a.medico.especialidade} + ')'"></td>
             <td th:text="${a.paciente.nome} + ' (' + ${a.paciente.cpf} + ')'"></td>
-            <td th:text="${#temporals.format(a.data, 'dd/MM/yyyy')} + ' ' + ${#temporals.format(a.hora, 'HH:mm')}"></td>
+            <td th:text="${#temporals.format(a.dataHoraAtendimento, 'dd/MM/yyyy HH:mm')}"></td>
             <td>
                 <a th:href="@{/agendas/editar/{id}(id=${a.id})}" class="btn btn-sm btn-warning">Editar</a>
                 <a th:href="@{/agendas/deletar/{id}(id=${a.id})}" class="btn btn-sm btn-danger"
