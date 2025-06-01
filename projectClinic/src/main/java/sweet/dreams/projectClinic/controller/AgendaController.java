@@ -1,9 +1,9 @@
-package edu.unialfa.clinica.controller;
+package sweet.dreams.projectClinic.controller;
 
-import edu.unialfa.clinica.model.Agenda;
-import edu.unialfa.clinica.service.AgendaService;
-import edu.unialfa.clinica.service.MedicoService;
-import edu.unialfa.clinica.service.PacienteService;
+import sweet.dreams.projectClinic.model.Agenda;
+import sweet.dreams.projectClinic.service.AgendaService;
+import sweet.dreams.projectClinic.service.MedicoService;
+import sweet.dreams.projectClinic.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
