@@ -15,10 +15,10 @@ public class AgendaService {
     private AgendaRepository agendaRepository;
 
     @Autowired
-    private MedicoService medicoService; // Para validar existência do médico
+    private MedicoService medicoService;
 
     @Autowired
-    private PacienteService pacienteService; // Para validar existência do paciente
+    private PacienteService pacienteService;
 
     public List<Agenda> listarTodos() {
         return agendaRepository.findAll();
