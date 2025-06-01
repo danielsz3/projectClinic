@@ -1,4 +1,4 @@
-package edu.unialfa.clinica.controller;
+package sweet.dreams.projectClinic.controller;
 
 import edu.unialfa.clinica.model.Paciente;
 import edu.unialfa.clinica.service.PacienteService;
