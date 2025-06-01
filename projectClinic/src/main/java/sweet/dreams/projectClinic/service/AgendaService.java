@@ -1,5 +1,6 @@
 package sweet.dreams.projectClinic.service;
 
+import jakarta.transaction.Transactional;
 import sweet.dreams.projectClinic.model.Agenda;
 import sweet.dreams.projectClinic.repository.AgendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +21,7 @@ public class AgendaService {
     @Autowired
     private PacienteService pacienteService;
 
-    public List<Agenda> listarTodos() {
-        return agendaRepository.findAll();
-    }
-
-    public Optional<Agenda> buscarPorId(Long id) {
-        return agendaRepository.findById(id);
-    }
-
+    @Transactional
     public Agenda salvar(Agenda agenda) {
         // Valida se médico e paciente existem antes de salvar
         medicoService.buscarPorId(agenda.getMedico().getId())
@@ -35,6 +29,14 @@ public class AgendaService {
         pacienteService.buscarPorId(agenda.getPaciente().getId())
                 .orElseThrow(() -> new RuntimeException("Paciente não encontrado!"));
         return agendaRepository.save(agenda);
+    }
+
+    public List<Agenda> listarTodos() {
+        return agendaRepository.findAll();
+    }
+
+    public Optional<Agenda> buscarPorId(Long id) {
+        return agendaRepository.findById(id);
     }
 
     public Agenda atualizar(Long id, Agenda agendaAtualizada) {
