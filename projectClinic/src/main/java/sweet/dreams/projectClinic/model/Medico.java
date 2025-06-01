@@ -1,5 +1,7 @@
 package sweet.dreams.projectClinic.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -25,8 +27,5 @@ public class Medico {
 
     @NotBlank(message = "Informa especialidade do Médico")
     private String especialidade;
-
-    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Agenda> agendas;
 
 }
