@@ -1,13 +1,13 @@
 package sweet.dreams.projectClinic.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.validation.constraints.NotBlank;
 
-import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -27,9 +27,5 @@ public class Agenda {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-    @NotBlank(message = "Informa a data do atendimento")
-    private LocalDate data;
-
-    @NotBlank(message = "Informa a hora do atendimento")
-    private LocalTime hora;
+    private LocalDateTime dataHoraAtendimento;
 }

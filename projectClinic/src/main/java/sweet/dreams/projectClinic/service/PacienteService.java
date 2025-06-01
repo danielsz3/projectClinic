@@ -1,14 +1,12 @@
 package sweet.dreams.projectClinic.service;
 
-
 import jakarta.transaction.Transactional;
-import jakarta.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sweet.dreams.projectClinic.model.Paciente;
 import sweet.dreams.projectClinic.repository.PacienteRepository;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,10 +18,14 @@ public class PacienteService {
     @Transactional
     public void salvar(Paciente paciente) {
         try {
-            if (paciente.getNome().isBlank() || paciente.getNome().isEmpty()) throw new RuntimeException("Adicione o nome do Paciente");
-            if (paciente.getCpf().isBlank() || paciente.getCpf().isEmpty()) throw new RuntimeException("Adicione o CPF do Paciente");
-            if (paciente.getDataNascimento().after(new Date()) || paciente.getDataNascimento().toString().isEmpty()) throw new RuntimeException("Adicione a data de nascimento do Paciente");
-            if (paciente.getTelefone().isBlank() || paciente.getTelefone().isEmpty()) throw new RuntimeException("Adicione o telefone do Paciente");
+            if (paciente.getNome().isBlank() || paciente.getNome().isEmpty())
+                throw new RuntimeException("Adicione o nome do Paciente");
+            if (paciente.getCpf().isBlank() || paciente.getCpf().isEmpty())
+                throw new RuntimeException("Adicione o CPF do Paciente");
+            if (paciente.getDataNascimento().isAfter(LocalDate.now()) || paciente.getDataNascimento().toString().isEmpty())
+                throw new RuntimeException("Adicione a data de nascimento do Paciente");
+            if (paciente.getTelefone().isBlank() || paciente.getTelefone().isEmpty())
+                throw new RuntimeException("Adicione o telefone do Paciente");
 
             repository.save(paciente);
         } catch (Exception e) {
