@@ -1,27 +1,28 @@
 package sweet.dreams.projectClinic.model;
 
-
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Compra {
-
+public class Agenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Informe o fornecedor")
-    private String fornecedor;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "medico_id")
+    private Medico medico;
 
-    @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ItemCompra> itens;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "paciente_id")
+    private Paciente paciente;
+
+    private LocalDateTime dataHoraAtendimento;
 }

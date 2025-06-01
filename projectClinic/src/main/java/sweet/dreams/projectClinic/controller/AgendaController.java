@@ -1,13 +1,13 @@
-package edu.unialfa.clinica.controller;
+package sweet.dreams.projectClinic.controller;
 
-import edu.unialfa.clinica.model.Agenda;
-import edu.unialfa.clinica.service.AgendaService;
-import edu.unialfa.clinica.service.MedicoService;
-import edu.unialfa.clinica.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import sweet.dreams.projectClinic.model.Agenda;
+import sweet.dreams.projectClinic.service.AgendaService;
+import sweet.dreams.projectClinic.service.MedicoService;
+import sweet.dreams.projectClinic.service.PacienteService;
 
 @Controller
 @RequestMapping("/agendas")
@@ -25,14 +25,16 @@ public class AgendaController {
     @GetMapping
     public String listarAgendas(Model model) {
         model.addAttribute("agendas", agendaService.listarTodos());
-        model.addAttribute("agenda", new Agenda());
-        model.addAttribute("medicos", medicoService.listarTodos());
-        model.addAttribute("pacientes", pacienteService.listarTodos());
-        return "agenda/agendas";
+        model.addAttribute("agenda", new Agenda()); // Para o formulário de cadastro
+        model.addAttribute("medicos", medicoService.listarTodos()); // Para o dropdown
+        model.addAttribute("pacientes", pacienteService.listarTodos()); // Para o dropdown
+        return "agenda/agendas"; // Nome do arquivo HTML (sem extensão)
     }
 
     @PostMapping
     public String adicionarAgenda(@ModelAttribute Agenda agenda) {
+        // As IDs de médico e paciente virão do formulário
+        // O service já valida a existência deles
         agendaService.salvar(agenda);
         return "redirect:/agendas";
     }
@@ -43,11 +45,12 @@ public class AgendaController {
         model.addAttribute("agenda", agenda);
         model.addAttribute("medicos", medicoService.listarTodos());
         model.addAttribute("pacientes", pacienteService.listarTodos());
-        return "agenda/editar_agenda";
+        return "agenda/editar_agenda"; // Nome do arquivo HTML para edição
     }
 
     @PostMapping("/editar/{id}")
     public String atualizarAgenda(@PathVariable Long id, @ModelAttribute Agenda agenda) {
+        // O service lida com a busca e atualização
         agendaService.atualizar(id, agenda);
         return "redirect:/agendas";
     }
@@ -58,6 +61,7 @@ public class AgendaController {
         return "redirect:/agendas";
     }
 
+    // Controller para a página Index
     @Controller
     public static class IndexController {
         @GetMapping("/")

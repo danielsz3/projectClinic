@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/layout :: head(paginaTitulo='Agenda')"></head>
+<body>
+
+<header th:replace="fragments/layout :: cabecalho"></header>
+
+<div class="container">
+    <h2>Gerenciar Agenda</h2>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            Agendar Novo Atendimento
+        </div>
+        <div class="card-body">
+            <form th:action="@{/agendas}" th:object="${agenda}" method="post">
+                <div class="row mb-3">
+                    <div class="col-md-4">
+                        <label for="medico" class="form-label">Médico:</label>
+                        <select id="medico" th:field="*{medico.id}" class="form-select" required>
+                            <option value="">Selecione um Médico</option>
+                            <option th:each="med : ${medicos}" th:value="${med.id}"
+                                    th:text="${med.nome} + ' (' + ${med.especialidade} + ')'"></option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="paciente" class="form-label">Paciente:</label>
+                        <select id="paciente" th:field="*{paciente.id}" class="form-select" required>
+                            <option value="">Selecione um Paciente</option>
+                            <option th:each="pac : ${pacientes}" th:value="${pac.id}"
+                                    th:text="${pac.nome} + ' (' + ${pac.cpf} + ')'"></option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="dataHoraAtendimento" class="form-label">Data e Hora:</label>
+                        <input type="datetime-local" id="dataHoraAtendimento" th:field="*{dataHoraAtendimento}"
+                               class="form-control" required/>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Salvar Agendamento</button>
+            </form>
+        </div>
+    </div>
+
+    <h3>Agendamentos</h3>
+    <table class="table table-striped table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Médico</th>
+            <th>Paciente</th>
+            <th>Data e Hora</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="a : ${agendas}">
+            <td th:text="${a.id}"></td>
+            <td th:text="${a.medico.nome} + ' (' + ${a.medico.especialidade} + ')'"></td>
+            <td th:text="${a.paciente.nome} + ' (' + ${a.paciente.cpf} + ')'"></td>
+            <td th:text="${#temporals.format(a.dataHoraAtendimento, 'dd/MM/yyyy HH:mm')}"></td>
+            <td>
+                <a th:href="@{/agendas/editar/{id}(id=${a.id})}" class="btn btn-sm btn-warning">Editar</a>
+                <a th:href="@{/agendas/deletar/{id}(id=${a.id})}" class="btn btn-sm btn-danger"
+                   onclick="return confirm('Tem certeza que deseja excluir este agendamento?)">Excluir</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(agendas)}">
+            <td colspan="5" class="text-center">Nenhum agendamento encontrado.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer th:replace="fragments/layout :: rodape"></footer>
+
+</body>
+</html>
