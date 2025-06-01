@@ -1,6 +1,5 @@
 package sweet.dreams.projectClinic.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -28,7 +27,6 @@ public class Medico {
     private String especialidade;
 
     @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private List<Agenda> agendas;
 
 }

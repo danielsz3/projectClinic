@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping("/api/agenda")
 public class AgendaApi {
 
@@ -19,8 +18,8 @@ public class AgendaApi {
     private AgendaService agendaService;
 
     @GetMapping
-    public ResponseEntity<List<Agenda>> listarTodos() {
-        return ResponseEntity.ok(agendaService.listarTodos());
+    public List<Agenda> listarTodos() {
+        return agendaService.listarTodos();
     }
 
 
