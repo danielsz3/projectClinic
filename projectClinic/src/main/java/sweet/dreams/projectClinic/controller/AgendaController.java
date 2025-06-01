@@ -1,3 +1,4 @@
+
 package sweet.dreams.projectClinic.controller;
 
 import sweet.dreams.projectClinic.model.Agenda;
@@ -39,7 +40,7 @@ public class AgendaController {
         agendaService.salvar(agenda);
         return "redirect:/agendas";
     }
-    
+
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
         Agenda agenda = agendaService.buscarPorId(id)
