@@ -14,17 +14,11 @@ public class MedicoController {
     @Autowired
     private MedicoService medicoService;
 
-    @Autowired
-    private AgendaController agendaController;
-
-    @Autowired
-    private PacienteController pacienteController;
-
     @GetMapping
     public String listarMedicos(Model model) {
         model.addAttribute("medicos", medicoService.listarTodos());
-        model.addAttribute("medico", new Medico());
-        return "medico/medicos";
+        model.addAttribute("medico", new Medico()); // Para o formulário de cadastro
+        return "medico/medicos"; // Nome do arquivo HTML (sem extensão)
     }
 
     @PostMapping
@@ -35,14 +29,15 @@ public class MedicoController {
 
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
-        Medico medico = medicoService.buscarPorId(id).orElseThrow(() -> new IllegalArgumentException("ID de Médico inválido:" + id));
+        Medico medico = medicoService.buscarPorId(id)
+                .orElseThrow(() -> new IllegalArgumentException("ID de Médico inválido:" + id));
         model.addAttribute("medico", medico);
-        return "medico/editar_medico";
+        return "medico/editar_medico"; // Nome do arquivo HTML para edição
     }
 
     @PostMapping("/editar/{id}")
     public String atualizarMedico(@PathVariable Long id, @ModelAttribute Medico medico) {
-        medico.setId(id);
+        medico.setId(id); // Garante que o ID correto seja usado
         medicoService.salvar(medico);
         return "redirect:/medicos";
     }
@@ -51,13 +46,5 @@ public class MedicoController {
     public String deletarMedico(@PathVariable Long id) {
         medicoService.deletarPorId(id);
         return "redirect:/medicos";
-    }
-
-    @Controller
-    public static class IndexController {
-        @GetMapping("/")
-        public String index() {
-            return "index";
-        }
     }
 }
