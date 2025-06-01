@@ -17,7 +17,9 @@ public class MedicoApi {
     private final MedicoService medicoService;
 
     @GetMapping
-    public ResponseEntity<List<Medico>> listarTodos() {return ResponseEntity.ok(medicoService.listarTodos());}
+    public ResponseEntity<List<Medico>> listarTodos() {
+        return ResponseEntity.ok(medicoService.listarTodos());
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Medico>> listarPorId(@PathVariable Long id) {
@@ -35,7 +37,7 @@ public class MedicoApi {
     }
 
     @PutMapping
-    public  ResponseEntity alterar(@RequestBody Medico medico) {
+    public ResponseEntity alterar(@RequestBody Medico medico) {
         try {
             if (medico.getId() == null) return ResponseEntity.badRequest().build();
             medicoService.salvar(medico);
@@ -46,7 +48,7 @@ public class MedicoApi {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deletar(@PathVariable Long id){
+    public ResponseEntity deletar(@PathVariable Long id) {
         try {
             medicoService.deletarPorId(id);
             return ResponseEntity.ok().build();
