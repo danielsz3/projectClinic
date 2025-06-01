@@ -33,9 +33,11 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <label for="hora" class="form-label">Data e Hora:</label>
-                        <input type="datetime-local" id="hora" th:field="*{hora}"
-                               class="form-control" required/>
+                        <label>Data:</label>
+                        <input class="form-control" type="date" th:field="*{data}" required/>
+
+                        <label>Hora:</label>
+                        <input class="form-control" type="time" th:field="*{hora}" required/>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar Agendamento</button>
@@ -59,10 +61,11 @@
             <td th:text="${a.id}"></td>
             <td th:text="${a.medico.nome} + ' (' + ${a.medico.especialidade} + ')'"></td>
             <td th:text="${a.paciente.nome} + ' (' + ${a.paciente.cpf} + ')'"></td>
-            <td th:text="${#temporals.format(a.dataHoraAtendimento, 'dd/MM/yyyy HH:mm')}"></td>
+            <td th:text="${#temporals.format(a.data, 'dd/MM/yyyy')} + ' ' + ${#temporals.format(a.hora, 'HH:mm')}"></td>
             <td>
                 <a th:href="@{/agendas/editar/{id}(id=${a.id})}" class="btn btn-sm btn-warning">Editar</a>
-                <a th:href="@{/agendas/deletar/{id}(id=${a.id})}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir este agendamento?)">Excluir</a>
+                <a th:href="@{/agendas/deletar/{id}(id=${a.id})}" class="btn btn-sm btn-danger"
+                   onclick="return confirm('Tem certeza que deseja excluir este agendamento?)">Excluir</a>
             </td>
         </tr>
         <tr th:if="${#lists.isEmpty(agendas)}">

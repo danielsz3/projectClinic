@@ -1,13 +1,13 @@
 package sweet.dreams.projectClinic.controller;
 
-import sweet.dreams.projectClinic.model.Agenda;
-import sweet.dreams.projectClinic.service.AgendaService;
-import sweet.dreams.projectClinic.service.MedicoService;
-import sweet.dreams.projectClinic.service.PacienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import sweet.dreams.projectClinic.model.Agenda;
+import sweet.dreams.projectClinic.service.AgendaService;
+import sweet.dreams.projectClinic.service.MedicoService;
+import sweet.dreams.projectClinic.service.PacienteService;
 
 @Controller
 @RequestMapping("/agendas")
@@ -31,7 +31,6 @@ public class AgendaController {
         return "agenda/agendas"; // Nome do arquivo HTML (sem extensão)
     }
 
-
     @PostMapping
     public String adicionarAgenda(@ModelAttribute Agenda agenda) {
         // As IDs de médico e paciente virão do formulário
@@ -39,11 +38,10 @@ public class AgendaController {
         agendaService.salvar(agenda);
         return "redirect:/agendas";
     }
-    
+
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
-        Agenda agenda = agendaService.buscarPorId(id)
-                .orElseThrow(() -> new IllegalArgumentException("ID de Agenda inválido:" + id));
+        Agenda agenda = agendaService.buscarPorId(id).orElseThrow(() -> new IllegalArgumentException("ID de Agenda inválido:" + id));
         model.addAttribute("agenda", agenda);
         model.addAttribute("medicos", medicoService.listarTodos());
         model.addAttribute("pacientes", pacienteService.listarTodos());

@@ -1,11 +1,12 @@
 package sweet.dreams.projectClinic.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.validation.constraints.NotBlank;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,13 +26,12 @@ public class Paciente {
     private String cpf;
 
     @NotBlank(message = "Informa a data de nascimento do paciente")
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
 
     @NotBlank(message = "Informe o telefone do paciente")
     private String telefone;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Agenda> agendas;
-
 
 }
