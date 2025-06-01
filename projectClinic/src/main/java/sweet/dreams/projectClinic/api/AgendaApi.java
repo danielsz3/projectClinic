@@ -1,56 +1,61 @@
 package sweet.dreams.projectClinic.api;
 
 import lombok.AllArgsConstructor;
+import sweet.dreams.projectClinic.service.AgendaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sweet.dreams.projectClinic.model.Paciente;
-import sweet.dreams.projectClinic.service.PacienteService;
+import sweet.dreams.projectClinic.model.Agenda;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@AllArgsConstructor
-@RequestMapping("api/paciente")
-public class PacienteApi {
+@RequestMapping("/api/agenda")
+public class AgendaApi {
 
-    private final PacienteService pacienteService;
+    @Autowired
+    private AgendaService agendaService;
 
     @GetMapping
-    public ResponseEntity<List<Paciente>> listarTodos() {
-        return ResponseEntity.ok(pacienteService.listarTodos());
+    public List<Agenda> listarTodos() {
+        return agendaService.listarTodos();
     }
+
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<Paciente>> listarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(pacienteService.buscarPorId(id));
+    public ResponseEntity<Optional<Agenda>> listarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(agendaService.buscarPorId(id));
+
     }
+
 
     @PostMapping
-    public ResponseEntity salvar(@RequestBody Paciente paciente) {
+    public ResponseEntity salvar(@RequestBody Agenda agenda) {
         try {
-            pacienteService.salvar(paciente);
+            agendaService.salvar(agenda);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
     }
 
-    @PutMapping
-    public ResponseEntity alterar(@RequestBody Paciente paciente) {
+
+    @PutMapping("/{id}")
+    public ResponseEntity alterar(@RequestBody Agenda agenda) {
         try {
-            if (paciente.getId() == null) return ResponseEntity.badRequest().build();
-            pacienteService.salvar(paciente);
+            if (agenda.getId() == null) return ResponseEntity.badRequest().build();
+            agendaService.salvar(agenda);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity deletar(@PathVariable Long id) {
         try {
-            pacienteService.deletarPorId(id);
+            agendaService.deletar(id);
             return ResponseEntity.ok().build();
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
