@@ -37,14 +37,14 @@ public class AgendaService {
 
     public Agenda atualizar(Long id, Agenda agendaAtualizada) {
         return agendaRepository.findById(id).map(agenda -> {
-            medicoService.buscarPorId(agendaAtualizada.getMedico().getId()).orElseThrow(() -> new RuntimeException("Medico não encontrado!"));
+            medicoService.buscarPorId(agendaAtualizada.getMedico().getId()).orElseThrow(() -> new RuntimeException("Médico não encontrado!"));
             pacienteService.buscarPorId(agendaAtualizada.getPaciente().getId()).orElseThrow(() -> new RuntimeException("Paciente não encontrado!"));
+
             agenda.setMedico(agendaAtualizada.getMedico());
             agenda.setPaciente(agendaAtualizada.getPaciente());
             agenda.setDataHoraAtendimento(agendaAtualizada.getDataHoraAtendimento());
             return agendaRepository.save(agenda);
         }).orElseThrow(() -> new RuntimeException("Agendamento não encontrado!"));
-
     }
 
     public void deletar(Long id) {

@@ -25,7 +25,8 @@
                     </div>
                     <div class="col-md-4">
                         <label for="especialidade" class="form-label">Especialidade:</label>
-                        <input type="text" id="especialidade" th:field="*{especialidade}" class="form-control" required/>
+                        <input type="text" id="especialidade" th:field="*{especialidade}" class="form-control"
+                               required/>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar Médico</button>
@@ -52,7 +53,8 @@
             <td th:text="${m.especialidade}"></td>
             <td>
                 <a th:href="@{/medicos/editar/{id}(id=${m.id})}" class="btn btn-sm btn-warning">Editar</a>
-                <a th:href="@{/medicos/deletar/{id}(id=${m.id})}" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir este médico?')">Excluir</a>
+                <a th:href="@{/medicos/deletar/{id}(id=${m.id})}" class="btn btn-sm btn-danger"
+                   onclick="return confirm('Tem certeza que deseja excluir este médico?')">Excluir</a>
             </td>
         </tr>
         <tr th:if="${#lists.isEmpty(medicos)}">

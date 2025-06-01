@@ -46,7 +46,7 @@ public class PacienteApi {
             return ResponseEntity.badRequest().build();
         }
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity deletar(@PathVariable Long id) {
         try {
