@@ -4,11 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import jakarta.validation.constraints.NotBlank;
 
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -27,9 +24,5 @@ public class Agenda {
     @JoinColumn(name = "paciente_id")
     private Paciente paciente;
 
-    @NotBlank(message = "Informa a data do atendimento")
-    private LocalDate data;
-
-    @NotBlank(message = "Informa a hora do atendimento")
-    private LocalTime hora;
+    private LocalDateTime dataHoraAtendimento;
 }

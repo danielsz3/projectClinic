@@ -29,8 +29,7 @@ public class MedicoController {
 
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
-        Medico medico = medicoService.buscarPorId(id)
-                .orElseThrow(() -> new IllegalArgumentException("ID de Médico inválido:" + id));
+        Medico medico = medicoService.buscarPorId(id).orElseThrow(() -> new IllegalArgumentException("ID de Médico inválido:" + id));
         model.addAttribute("medico", medico);
         return "medico/editar_medico"; // Nome do arquivo HTML para edição
     }

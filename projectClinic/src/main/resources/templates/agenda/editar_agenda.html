@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments/layout :: head(paginaTitulo='Editar Agendamento')"></head>
-
 <body>
 
 <header th:replace="fragments/layout :: cabecalho"></header>
@@ -20,19 +19,24 @@
                         <label for="medico" class="form-label">Médico:</label>
                         <select id="medico" th:field="*{medico.id}" class="form-select" required>
                             <option value="">Selecione um Médico</option>
-                            <option th:each="med : ${medicos}" th:value="${med.id}" th:text="${med.nome} + ' (' + ${med.especialidade} + ')'" th:selected="${med.id == agenda.medico.id}"></option>
+                            <option th:each="med : ${medicos}" th:value="${med.id}"
+                                    th:text="${med.nome} + ' (' + ${med.especialidade} + ')'"
+                                    th:selected="${med.id == agenda.medico.id}"></option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label for="paciente" class="form-label">Paciente:</label>
                         <select id="paciente" th:field="*{paciente.id}" class="form-select" required>
                             <option value="">Selecione um Paciente</option>
-                            <option th:each="pac : ${pacientes}" th:value="${pac.id}" th:text="${pac.nome} + ' (' + ${pac.cpf} + ')'" th:selected="${pac.id == agenda.paciente.id}"></option>
+                            <option th:each="pac : ${pacientes}" th:value="${pac.id}"
+                                    th:text="${pac.nome} + ' (' + ${pac.cpf} + ')'"
+                                    th:selected="${pac.id == agenda.paciente.id}"></option>
                         </select>
                     </div>
                     <div class="col-md-4">
                         <label for="dataHoraAtendimento" class="form-label">Data e Hora:</label>
-                        <input type="datetime-local" id="dataHoraAtendimento" th:field="*{dataHoraAtendimento}" class="form-control" required/>
+                        <input type="datetime-local" id="dataHoraAtendimento" th:field="*{dataHoraAtendimento}"
+                               class="form-control" required/>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Salvar Alterações</button>
