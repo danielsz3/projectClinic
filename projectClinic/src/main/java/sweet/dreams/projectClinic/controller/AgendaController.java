@@ -25,34 +25,29 @@ public class AgendaController {
     @GetMapping
     public String listarAgendas(Model model) {
         model.addAttribute("agendas", agendaService.listarTodos());
-        model.addAttribute("agenda", new Agenda()); // Para o formulário de cadastro
-        model.addAttribute("medicos", medicoService.listarTodos()); // Para o dropdown
-        model.addAttribute("pacientes", pacienteService.listarTodos()); // Para o dropdown
-        return "agenda/agendas"; // Nome do arquivo HTML (sem extensão)
+        model.addAttribute("agenda", new Agenda());
+        model.addAttribute("medicos", medicoService.listarTodos());
+        model.addAttribute("pacientes", pacienteService.listarTodos());
+        return "agenda/agendas";
     }
-
 
     @PostMapping
     public String adicionarAgenda(@ModelAttribute Agenda agenda) {
-        // As IDs de médico e paciente virão do formulário
-        // O service já valida a existência deles
         agendaService.salvar(agenda);
         return "redirect:/agendas";
     }
-    
+
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicao(@PathVariable Long id, Model model) {
-        Agenda agenda = agendaService.buscarPorId(id)
-                .orElseThrow(() -> new IllegalArgumentException("ID de Agenda inválido:" + id));
+        Agenda agenda = agendaService.buscarPorId(id).orElseThrow(() -> new IllegalArgumentException("ID de Agenda inválido:" + id));
         model.addAttribute("agenda", agenda);
         model.addAttribute("medicos", medicoService.listarTodos());
         model.addAttribute("pacientes", pacienteService.listarTodos());
-        return "agenda/editar_agenda"; // Nome do arquivo HTML para edição
+        return "agenda/editar_agenda";
     }
 
     @PostMapping("/editar/{id}")
     public String atualizarAgenda(@PathVariable Long id, @ModelAttribute Agenda agenda) {
-        // O service lida com a busca e atualização
         agendaService.atualizar(id, agenda);
         return "redirect:/agendas";
     }
@@ -63,7 +58,6 @@ public class AgendaController {
         return "redirect:/agendas";
     }
 
-    // Controller para a página Index
     @Controller
     public static class IndexController {
         @GetMapping("/")
